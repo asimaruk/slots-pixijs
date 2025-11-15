@@ -60,6 +60,8 @@ import { SlotMachineVM } from './viewmodel/SlotMachineVM';
   );
 
   app.stage.addChild(slotsMachineView);
+  const gameScale = Math.min(1, window.innerWidth / 400, window.innerHeight / 600);
+  app.stage.scale = gameScale;
   app.stage.position.set(
     window.innerWidth / 2,
     window.innerHeight / 2,
