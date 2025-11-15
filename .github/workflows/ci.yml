@@ -20,7 +20,7 @@ jobs:
           cd ..
           npm i
       - name: Build client
-        run: npm run build
+        run: npm run build -- --base=/slots-pixijs/
       - name: Upload artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
