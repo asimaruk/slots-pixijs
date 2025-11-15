@@ -207,6 +207,14 @@ export class SlotReelsView extends Container {
         this.subscriber.unsubscribe();
     }
 
+    scaleFont(ratio: number) {
+        this.reels.forEach(r => {
+            r.symbols.forEach(t => {
+                t.style.fontSize = this.symbolSize * ratio;
+            });
+        });
+    }
+
     public completeSpin(): Promise<void> {
         this.spinPromise ??= new Promise((res, _) => {
             this.resolveSpin = res;

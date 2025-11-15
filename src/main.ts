@@ -66,6 +66,7 @@ import { SlotMachineVM } from './viewmodel/SlotMachineVM';
     window.innerWidth / 2,
     window.innerHeight / 2,
   );
+  slotReelsView.scaleFont(gameScale);
 
   app.ticker.add((ticker) => {
     tweenSystem.update(ticker.deltaMS / 1000);
