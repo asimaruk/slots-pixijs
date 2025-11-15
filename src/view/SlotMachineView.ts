@@ -66,10 +66,10 @@ export class SlotMachineView extends Container {
     }
 
     private setupStartButton() {
-        const container = new Container();
-        this.addChild(container);
-        container.y = 200;
-        this.startButton = new Graphics()
+        this.startButton = new Container();
+        this.addChild(this.startButton);
+        this.startButton.y = 200;
+        const startGraphics = new Graphics()
             .roundRect(0, 0, 150, 70, 15)
             .fill(0xf34825)
             .setStrokeStyle({
@@ -77,8 +77,8 @@ export class SlotMachineView extends Container {
                 width: 2,
             })
             .stroke();
-        this.startButton.pivot.set(75, 35);
-        container.addChild(this.startButton);
+        startGraphics.pivot.set(75, 35);
+        this.startButton.addChild(startGraphics);
         this.startButton.onpointerdown = () => this.onStartPressed();
         this.startButton.interactive = true;
 
@@ -90,7 +90,7 @@ export class SlotMachineView extends Container {
             style: style,
         });
         startText.pivot.set(startText.width / 2, startText.height / 2);
-        container.addChild(startText);
+        this.startButton.addChild(startText);
 
     }
 
