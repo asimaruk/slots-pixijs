@@ -1,0 +1,42 @@
+name: "Deploy Github Pages"
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: Build and deploy game
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses : actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: |
+          cd slots-core
+          npm i
+          npm run build
+          cd ..
+          npm i
+      - name: Build client
+        run: npm run build
+      - name: Upload artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: macos-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
